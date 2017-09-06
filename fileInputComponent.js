@@ -1,4 +1,4 @@
-S(function (manywho) {
+(function (manywho) {
 
     function getStringAttribute(attributes, name) {
 
@@ -33,11 +33,11 @@ S(function (manywho) {
 
             var model = manywho.model.getComponent(this.props.id, this.props.flowKey);
 
-            var fileInputContainer = document.getElementById(id);
+            //var fileInputContainer = document.getElementById(id);
 
-            var html = "<input type='file' name='file-input-comp[]' >";
+            //var html = "<input type='file' name='file-input-comp' >";
 
-            fileInputContainer.appendChild(html);
+            //fileInputContainer.appendChild(html);
         },
 
         render: function () {
