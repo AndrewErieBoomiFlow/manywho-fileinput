@@ -1,10 +1,15 @@
 (function (manywho) {
 
+
     var fileInputTest = React.createClass({
+
+    componentDidMount: function () {
+        console.log("Initialized File Input Comp");
+    },
          
     handleChange: function (e) {
         console.log("Func : handleChange Called");
- 
+
         manywho.state.setComponent(this.props.id, { contentValue: e.target.value }, this.props.flowKey, true);
         manywho.component.handleEvent(this, manywho.model.getComponent(this.props.id, this.props.flowKey), this.props.flowKey);
  
@@ -16,19 +21,20 @@
  
         var files = e.target.files;
         var file = files[0];
+        var outbox = document.getElementById("fileInputPass");
+        var targ = this;
 
         if (files && file) {
             var reader = new FileReader();
-
+            console.log("Start Load");
             reader.onload = function(readerEvt) {
+                console.log("Completed binary file to string convertion");
                 var binaryString = readerEvt.target.result;
-                var outbox = document.getElementById("fileInputPass");
                 outbox.value = btoa(binaryString);
+                manywho.state.setComponent(targ.props.id, { contentValue: outbox.value }, targ.props.flowKey, true);
             };
-
             reader.readAsBinaryString(file);
         }
-
     },
  
     render: function () {
