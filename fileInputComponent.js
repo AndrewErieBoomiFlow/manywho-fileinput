@@ -50,7 +50,7 @@ TODO:
         var state = manywho.state.getComponent(this.props.id, this.props.flowKey);
 
         return React.DOM.div(null, [
-              React.DOM.div({ className: 'fileInputTestBox ' },
+              React.DOM.div({ className: 'fileInputBox ' },
                   React.DOM.label(null, [
                       model.label,
                       React.DOM.input({ type: 'file', className: 'fileInputElement',  onChange: this.handleFileConvert}, null) ,
@@ -61,7 +61,7 @@ TODO:
     }
 });
  
-manywho.component.register('fileInputComponent', fileInputTest, [ 'fileInputTestBox' ]);
+manywho.component.register('fileInputComponent', fileInputTest, [ 'fileInputBox' ]);
 
 
 }(manywho));
