@@ -28,8 +28,12 @@ TODO:
         //console.log("Func : handleFileConvert Called");
         var files = e.target.files;
         var file = files[0];
-        var outbox = document.getElementById("fileInputPass");
+        //var outbox = document.getElementById("fileInputPass");
+        var loader = document.getElementById("FileInputLoading");
         var targ = this;
+        var outputString;
+
+        loader.innerHTML = "Loading File....";
 
         if (files && file) {
             var reader = new FileReader();
@@ -37,8 +41,9 @@ TODO:
             reader.onload = function(readerEvt) {
                 //console.log("Completed binary file to string convertion");
                 var binaryString = readerEvt.target.result;
-                outbox.value = btoa(binaryString);
-                manywho.state.setComponent(targ.props.id, { contentValue: outbox.value }, targ.props.flowKey, true);
+                outputString = btoa(binaryString);
+                manywho.state.setComponent(targ.props.id, { contentValue: outputString }, targ.props.flowKey, true);
+                loader.innerHTML = "";
             };
             reader.readAsBinaryString(file);
         }
@@ -50,14 +55,14 @@ TODO:
         var state = manywho.state.getComponent(this.props.id, this.props.flowKey);
 
         return React.DOM.div(null, [
-              React.DOM.div({ className: 'fileInputBox ' },
+              React.DOM.div({ className: 'fileInputBox ' },                  
                   React.DOM.label(null, [
                       model.label,
-                      React.DOM.input({ type: 'file', className: 'fileInputElement',  onChange: this.handleFileConvert}, null) ,
-                      React.DOM.textarea({  id:'fileInputPass', className: 'fileInputPass', value: state.contentValue, onChange: this.handleChange }, null)                
-                  ])
+                      React.DOM.input({ type: 'file', className: 'fileInputElement',  onChange: this.handleFileConvert}, null),                                                                         
+                  ]),
+                  React.DOM.div({id:"FileInputLoading"}, null),
               ),
-        ]); 
+        ]);
     }
 });
  
